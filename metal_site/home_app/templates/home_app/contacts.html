@@ -1,0 +1,62 @@
+{% extends "home_app/base.html" %}
+{% load static %}
+{% block title %}{{title}}{% endblock title %}
+
+{% block content %}
+<div class="contact_info" style="margin: 30px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1">
+                <div
+                    class="contact_info_container d-flex flex-lg-row flex-column justify-content-between align-items-between">
+
+
+                    <div class="contact_info_item d-flex flex-row align-items-center justify-content-start">
+                        <div class="contact_info_image"><img src="{% static 'images/contact_1.png' %}" alt=""></div>
+                        <div class="contact_info_content">
+                            <div class="contact_info_title">Телефон</div>
+                            <div class="contact_info_text">+7 999 999 99 99</div>
+                        </div>
+                    </div>
+
+
+                    <div class="contact_info_item d-flex flex-row align-items-center justify-content-start">
+                        <div class="contact_info_image"><img src="{% static 'images/contact_2.png' %}" alt=""></div>
+                        <div class="contact_info_content">
+                            <div class="contact_info_title">Email</div>
+                            <div class="contact_info_text">крутой_имейл@gmail.com</div>
+                        </div>
+                    </div>
+
+
+                    <div class="contact_info_item d-flex flex-row align-items-center justify-content-start">
+                        <div class="contact_info_image"><img src="{% static 'images/contact_3.png' %}" alt=""></div>
+                        <div class="contact_info_content">
+                            <div class="contact_info_title">Адрес</div>
+                            <div class="contact_info_text">Москва ...</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div style="margin: 30px;">
+    <form action="{% url 'home_app:contacts' %}" method="POST" enctype="multipart/form-data" style="align-self: left;">
+        {% csrf_token %}
+        <fieldset
+            style="width: 300px; margin: 0; padding: 20px; border: 1px solid #ccc; border-radius: 5px; text-align: left;">
+            <legend style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">Связаться с нами</legend>
+            <input type="text" name="name" placeholder="Ваше имя">
+            <input type="email" name="email" placeholder="Ваш email">
+            <input type="tel" name="contact_number" placeholder="Ваш телефонный номер">
+            <textarea name="comment" placeholder="Вашe сообщение"
+                style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;"></textarea>
+            <button type="submit">Отправить</button>
+        </fieldset>
+    </form>
+
+</div>
+{% endblock %}

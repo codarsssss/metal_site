@@ -1,0 +1,45 @@
+{% extends "home_app/base.html" %}
+{% load static %}
+{% block title %}{{title}}{% endblock title %}
+
+
+{% block content %}
+<div id="content">
+    <img src="{{ category.image.url }}">
+    <div>{{category.title}}
+        <p>{{category.description}}</p>
+    </div>
+    <div>
+        <table border="1">
+            <tr>
+                <th>
+                    <p>Обозначение</p>
+                </th>
+                <th>
+                    <p>Марка материала</p>
+                </th>
+                <th>
+                    <p>Единица поставки</p>
+                </th>
+                <th>
+                    <p>Цена за единицу, руб.</p>
+                </th>
+                <th>
+                    <p>Остаток на складе</p>
+                </th>
+            </tr>
+            {% for product in products %}
+            <tr>
+                <th>{{product.designation}}</th>
+                <th>{{product.material}}</th>
+                <th>{{product.units_of_measure}}</th>
+                <th>{{product.price_for_unit}}</th>
+                <th>{{product.in_stock}}</th>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</div>
+{% include "home_app/pagination.html" with page=products %}
+{% endblock content %}

@@ -1,15 +1,50 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }}</title>
+    <title>{% block title %} Default {% endblock title %}</title>
 </head>
 
-<body>
-    <h1>{{ text }}</h1>
-
+<body style="margin: 20px">
+    <div id="header">
+        <!-- <img id="background" src="..." изображение фона
+        <img id="logo" src="..."> изображение логотипа организациии-->
+    </div>
+    <div id="menu" style="margin: 30px;"><a href="{% url 'home_app:home' %}">Продукция</a> | <a
+            href="{% url 'home_app:about' %}">О нас</a> |
+        <a href="{% url 'home_app:contacts' %}">Контакты</a>
+    </div>
+    <div id="content" style="margin: 30px;">
+        {% block content %}{% endblock content %}
 </body>
+<footer class="footer" style="margin: 30px;">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-3 footer_col">
+                <div class="footer_column footer_contact">
+                    <div class="footer_title">Остались вопросы? Звони!</div>
+                    <div class="footer_phone">+7 999 999 99 99</div>
+                    <div class="footer_contact_text">
+                        <p>Где-то на территории России</p>
+                        <p>Москва, ул...</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 offset-lg-2">
+                <div class="footer_column">
+                    <div class="footer_title">Ссылки</div>
+                    <ul class="footer_list">
+                        <li><a href="{% url 'home_app:home' %}">Продукция</a></li>
+                        <li><a href="{% url 'home_app:about' %}">О нас</a></li>
+                        <li><a href="{% url 'home_app:contacts' %}">Контакты</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
 
 </html>

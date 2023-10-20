@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, Category
+from .models import Product, Category, Feedback
 
 
 @admin.register(Category)
@@ -35,3 +35,19 @@ class ProductAdmin(admin.ModelAdmin):
         "title",
         "material",
     ]
+
+
+@admin.register(Feedback)
+class FeedbackAdmin(admin.ModelAdmin):
+    list_display = [
+        "name",
+        "contact_number",
+        "email",
+        "time_create",
+    ]
+    list_filter = ["contact_number", "time_create"]
+    search_fields = [
+        "contact_number",
+        "email",
+    ]
+    ordering = ["time_create", "contact_number"]
