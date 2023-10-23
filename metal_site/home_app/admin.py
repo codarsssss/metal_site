@@ -9,6 +9,7 @@ class CategoryAdmin(admin.ModelAdmin):
         "slug",
     ]
     prepopulated_fields = {"slug": ("title",)}
+    list_per_page = 10
 
 
 @admin.register(Product)
@@ -35,6 +36,7 @@ class ProductAdmin(admin.ModelAdmin):
         "title",
         "material",
     ]
+    list_per_page = 10
 
 
 @admin.register(Feedback)
@@ -51,3 +53,4 @@ class FeedbackAdmin(admin.ModelAdmin):
         "email",
     ]
     ordering = ["time_create", "contact_number"]
+    list_per_page = 10

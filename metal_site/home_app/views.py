@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from .forms import FeedbackForm
-from .models import Category, Product
+from .models import Category
 
 # Create your views here.
 
@@ -52,13 +52,17 @@ def about(request):
 
 
 def contacts(request):
-    # if request.method == "POST":
-    #     if send_feedback(request):
-    #         return redirect("home_app:contacts")
     if request.method == "POST":
         form = FeedbackForm(request.POST)
         if form.is_valid():
             form.save()
+            # send_message(
+            #     bot_name,
+            #     form.cleaned_data["name"],
+            #     form.cleaned_data["email"],
+            #     form.cleaned_data["contact_number"],
+            #     form.cleaned_data["comment"],
+            # )
             return redirect("home_app:contacts")
         else:
             context = {"title": "Контакты", "form": form}
@@ -67,3 +71,9 @@ def contacts(request):
         form = FeedbackForm()
         context = {"title": "Контакты", "form": form}
         return render(request, "home_app/contacts.html", context=context)
+
+
+def send_message(bot_name, *args):
+    """отправка данных в telegramm,
+    contact - id получателя, args - список данных с формы"""
+    pass

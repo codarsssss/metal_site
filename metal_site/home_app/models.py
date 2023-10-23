@@ -66,7 +66,9 @@ class Product(models.Model):
 class Feedback(models.Model):
     name = models.CharField(max_length=64, verbose_name="Имя")
     email = models.EmailField(max_length=128, verbose_name="Электронный адрес (email)")
-    contact_number = models.SlugField(unique=True, verbose_name="Контактный номер")
+    contact_number = models.CharField(
+        unique=True, verbose_name="Контактный номер", max_length=12
+    )
     comment = models.TextField(verbose_name="Содержание послания")
     time_create = models.DateTimeField(auto_now_add=True, verbose_name="Дата отправки")
 
