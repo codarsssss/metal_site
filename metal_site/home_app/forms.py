@@ -23,12 +23,12 @@ class FeedbackForm(forms.ModelForm):
 
     def clean_contact_number(self):
         contact_number = self.cleaned_data["contact_number"]
-        allowed = "+123456789"
+        allowed = "+1234567890"
         if not (set(contact_number) <= set(allowed)):
             raise forms.ValidationError(
-                "Введите корректное значение телефонного номера в формате '+79999999999'"
+                "Телефонный номер содержим недопустимые символы (формат '+79999999999')"
             )
-        if 10 < len(contact_number) < 12:
+        if not (10 < len(contact_number) <= 12):
             raise forms.ValidationError(
                 "Введите корректное значение телефонного номера в формате '+79999999999'"
             )

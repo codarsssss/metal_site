@@ -1,7 +1,10 @@
-from django.http import HttpResponse
+import asyncio
 from django.shortcuts import get_object_or_404, redirect, render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib import messages
 
+
+from .bot_telegram import send_telegram_message
 from .forms import FeedbackForm
 from .models import Category
 
@@ -55,14 +58,16 @@ def contacts(request):
     if request.method == "POST":
         form = FeedbackForm(request.POST)
         if form.is_valid():
+            asyncio.run(
+                send_telegram_message(
+                    f"{form.cleaned_data['name']} ({form.cleaned_data['contact_number']})\
+             - {form.cleaned_data['comment']}"
+                )
+            )
             form.save()
-            # send_message(
-            #     bot_name,
-            #     form.cleaned_data["name"],
-            #     form.cleaned_data["email"],
-            #     form.cleaned_data["contact_number"],
-            #     form.cleaned_data["comment"],
-            # )
+            messages.success(
+                request, f"В ближайшее время мы обязательно свяжемся с Вами!"
+            )
             return redirect("home_app:contacts")
         else:
             context = {"title": "Контакты", "form": form}
@@ -71,9 +76,3 @@ def contacts(request):
         form = FeedbackForm()
         context = {"title": "Контакты", "form": form}
         return render(request, "home_app/contacts.html", context=context)
-
-
-def send_message(bot_name, *args):
-    """отправка данных в telegramm,
-    contact - id получателя, args - список данных с формы"""
-    pass

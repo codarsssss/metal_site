@@ -4,6 +4,13 @@
 
 {% block content %}
 <div class="contact_info" style="margin: 30px;">
+    <div class="message" style="margin: 15px; background-color: aliceblue;">
+        {% if messages %}
+        {% for message in messages %}
+        {{ message }}
+        {% endfor %}
+        {% endif %}
+    </div>
     <div class="container">
         <div class="row">
             <div class="col-lg-10 offset-lg-1">
