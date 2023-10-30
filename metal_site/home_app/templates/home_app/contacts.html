@@ -1,10 +1,11 @@
-{% extends "home_app/base.html" %}
+{% extends "layout/base.html" %}
 {% load static %}
 {% block title %}{{title}}{% endblock title %}
 
 {% block content %}
 <div class="contact_info" style="margin: 30px;">
     <div class="message" style="margin: 15px; background-color: aliceblue;">
+        {% csrf_token %}
         {% if messages %}
         {% for message in messages %}
         {{ message }}

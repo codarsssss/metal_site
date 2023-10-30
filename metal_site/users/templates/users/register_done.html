@@ -1,0 +1,10 @@
+{% extends 'layout/base.html' %}
+
+{% block title %} {{ title }}{% endblock %}
+
+{% block content %}
+<h1>Welcome on board!</h1>
+
+<p>Вы успешно зарегистрировались на сайте! Авторизоваться по <a href="{% url 'users:login' %}">ссылке</a>
+</p>
+{% endblock %}
