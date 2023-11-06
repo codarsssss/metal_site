@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 import os
+from metal_site.secret import PORT_DB, PASSWORD_DB, HOST_DB, EMAIL_PASSWORD
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -41,14 +42,15 @@ INSTALLED_APPS = [
     "home_app.apps.HomeAppConfig",
     "users.apps.UsersConfig",
     "debug_toolbar",
+    "captcha",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "django.contrib.sessions.middleware.SessionMiddleware",  # овтечает за сессии
+    "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
-    "django.contrib.auth.middleware.AuthenticationMiddleware",  # отвечает за авторизацию
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
@@ -78,12 +80,14 @@ WSGI_APPLICATION = "metal_site.wsgi.application"
 
 
 # Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "metal_site_db",
+        "USER": "metal_site",
+        "PASSWORD": PASSWORD_DB,
+        "HOST": HOST_DB,
+        "PORT": PORT_DB,
     }
 }
 
@@ -146,3 +150,20 @@ AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
     "users.authentication.EmailAuthBackend",
 ]
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
+EMAIL_HOST = "smtp.yandex.ru"
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "metal.site.newsletter@yandex.ru"
+EMAIL_HOST_PASSWORD = EMAIL_PASSWORD
+
+EMAIL_USE_SSL = True
+
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+SERVER_EMAIL = EMAIL_HOST_USER
+EMAIL_ADMIN = EMAIL_HOST_USER
+
+AUTH_USER_MODEL = "users.User"
+
+DEFAULT_USER_IMAGE = MEDIA_URL + "users/default.png"

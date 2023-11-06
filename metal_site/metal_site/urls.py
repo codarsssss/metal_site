@@ -26,4 +26,5 @@ urlpatterns = [
     path("", include("home_app.urls"), name="home_app"),
     path("users/", include("users.urls"), name="users"),
     path("__debug__/", include("debug_toolbar.urls")),
+    path("captcha/", include("captcha.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

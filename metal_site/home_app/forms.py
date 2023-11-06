@@ -1,13 +1,22 @@
 from django import forms
-from django.core.validators import RegexValidator
+from captcha.fields import CaptchaField
+
 
 from .models import Feedback
 
 
 class FeedbackForm(forms.ModelForm):
+    captcha = CaptchaField()
+
     class Meta:
         model = Feedback
-        fields = ("name", "email", "contact_number", "comment")
+        fields = (
+            "name",
+            "email",
+            "contact_number",
+            "comment",
+            "captcha",
+        )
         widgets = {
             "name": forms.TextInput(
                 attrs={"class": "form-input", "placeholder": "Ваше имя"}
