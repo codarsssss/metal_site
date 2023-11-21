@@ -12,43 +12,14 @@
         {% endfor %}
         {% endif %}
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-10 offset-lg-1">
-                <div
-                    class="contact_info_container d-flex flex-lg-row flex-column justify-content-between align-items-between">
-
-
-                    <div class="contact_info_item d-flex flex-row align-items-center justify-content-start">
-                        <div class="contact_info_image"><img src="{% static 'images/contact_1.png' %}" alt=""></div>
-                        <div class="contact_info_content">
-                            <div class="contact_info_title">Телефон</div>
-                            <div class="contact_info_text">+7 999 999 99 99</div>
-                        </div>
-                    </div>
-
-
-                    <div class="contact_info_item d-flex flex-row align-items-center justify-content-start">
-                        <div class="contact_info_image"><img src="{% static 'images/contact_2.png' %}" alt=""></div>
-                        <div class="contact_info_content">
-                            <div class="contact_info_title">Email</div>
-                            <div class="contact_info_text">крутой_имейл@gmail.com</div>
-                        </div>
-                    </div>
-
-
-                    <div class="contact_info_item d-flex flex-row align-items-center justify-content-start">
-                        <div class="contact_info_image"><img src="{% static 'images/contact_3.png' %}" alt=""></div>
-                        <div class="contact_info_content">
-                            <div class="contact_info_title">Адрес</div>
-                            <div class="contact_info_text">Москва ...</div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
+    <div>
+        <h2>Контактная информация</h2>
+        <p>Телефон: +7 (495) 795-87-97</p>
+        <p>E-mail: <a href="mailto:info@grand-mt.ru">info@grand-mt.ru</a></p>
+        <p>Режим работы: с 8:00 до 17:00 пн-пт., перерыв с 12:00 до 13:00</p>
+        <p>Адрес: 143960, Московская область, г. Реутов, ул. Фабричная, дом 4</p>
     </div>
+
 </div>
 </div>
 <div style="margin: 30px;">
@@ -70,6 +41,43 @@
             <button class="button" type="submit">Отправить</button>
         </fieldset>
     </form>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1">
+                <div
+                    class="contact_info_container d-flex flex-lg-row flex-column justify-content-between align-items-between">
 
+
+                    <div class="contact_info_item d-flex flex-row align-items-center justify-content-start">
+                        <div class="contact_info_image"><img src="{% static 'images/contact_1.png' %}" alt=""></div>
+                        <div class="contact_info_content">
+                            <div class="contact_info_title">Телефон</div>
+                            <div class="contact_info_text">+7 (495) 795-87-97</div>
+                        </div>
+                    </div>
+
+
+                    <div class="contact_info_item d-flex flex-row align-items-center justify-content-start">
+                        <div class="contact_info_image"><img src="{% static 'images/contact_2.png' %}" alt=""></div>
+                        <div class="contact_info_content">
+                            <div class="contact_info_title">Email</div>
+                            <div class="contact_info_text">info@grand-mt.ru</div>
+                        </div>
+                    </div>
+
+
+                    <div class="contact_info_item d-flex flex-row align-items-center justify-content-start">
+                        <div class="contact_info_image"><img src="{% static 'images/contact_3.png' %}" alt=""></div>
+                        <div class="contact_info_content">
+                            <div class="contact_info_title">Адрес</div>
+                            <div class="contact_info_text">143960, Московская область, г. Реутов, ул. Фабричная, дом 4
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, Category, Feedback
+from .models import Product, Category, Feedback, FilePrice
 
 
 @admin.register(Category)
@@ -54,3 +54,15 @@ class FeedbackAdmin(admin.ModelAdmin):
     ]
     ordering = ["time_create", "contact_number"]
     list_per_page = 10
+
+
+@admin.register(FilePrice)
+class FilePriceadmin(admin.ModelAdmin):
+    list_display = [
+        "time_create",
+        "price_file",
+    ]
+
+    ordering = [
+        "time_create",
+    ]

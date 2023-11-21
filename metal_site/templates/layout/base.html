@@ -1,58 +1,100 @@
-{% load static %}
 <!DOCTYPE html>
-
+{% load static %}
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="#" />
+    <meta name="viewport">
+    <link rel="shortcut icon" href="#"/>
     <title>{% block title %} Default {% endblock title %}</title>
+    <!--    styles-->
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" rel="stylesheet"/>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Local style -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!--    styles-->
 </head>
+<body>
+<!--menu-->
+<nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
 
-<body style="margin: 20px">
-    <div id="header">
-        <!-- <img id="background" src="..." изображение фона
-        <img id="logo" src="..."> изображение логотипа организациии-->
+<!--<nav class="navbar navbar-expand-md bg-body-tertiary" >-->
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'home_app:home' %}"><img id="main-logo"  src="{% static 'images/logo_grand.svg' %}" alt="logo"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'home_app:home' %}">Товары</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'home_app:about' %}">О нас</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'home_app:contacts' %}">Контакты</a>
+        </li>
+          <li class="nav-item">
+          <a class="nav-link" href="{% url 'home_app:services' %}">Услуги</a>
+        </li>
+          <li class="nav-item">
+          <a class="nav-link" href="{% url 'home_app:transportation' %}">Грузоперевозки</a>
+        </li>
+      </ul>
+      <span class="navbar-text">
+         {% if user.is_authenticated %}
+        <a class="nav-link" href="{% url 'users:profile' %}">{{user.username}}</a> | <a href="{% url 'users:logout' %}">Выйти</a>
+        {% else %}
+          <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'users:login' %}">Войти</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'users:register' %}">Регистрация</a>
+        </li>
+          </ul>
+        {% endif %}
+      </span>
     </div>
-    <div id="menu" style="margin: 30px;"><a href="{% url 'home_app:home' %}">Продукция</a> | <a
-            href="{% url 'home_app:about' %}">О нас</a> |
-        <a href="{% url 'home_app:contacts' %}">Контакты</a>
-        <div style="float: right;">
-            {% if user.is_authenticated %}
-            <a href="{% url 'users:profile' %}">{{user.username}}</a> | <a href="{% url 'users:logout' %}">Выйти</a>
-            {% else %}
-            <a href="{% url 'users:login' %}">Войти</a> | <a href="{% url 'users:register' %}">Регистрация</a>
-            {% endif %}
-        </div>
-    </div>
-    <div id="content" style="margin: 30px;">
-        {% block content %}{% endblock content %}
+  </div>
+</nav>
+<!--menu-->
+    {% block content %}{% endblock content %}
+<!-- Footer -->
+<div class="container">
+  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <p class="col-md-4 mb-0 text-muted">© 2023 ООО "Гранд-Металл"</p>
+
+    <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+      <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+    </a>
+
+    <ul class="nav col-md-4 justify-content-end">
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
+    </ul>
+  </footer>
+</div>
+
+<!-- MDB -->
+<script
+        type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"
+></script>
+<!-- Bootstrap -->
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"
+></script>
 </body>
-<footer class="footer" style="margin: 30px;">
-    <div class="container">
-        <div class="row">
-
-            <div class="col-lg-3 footer_col">
-                <div class="footer_column footer_contact">
-                    <div class="footer_title">Остались вопросы? Звони!</div>
-                    <div class="footer_phone">+7 999 999 99 99</div>
-                    <div class="footer_contact_text">
-                        <p>Где-то на территории России</p>
-                        <p>Москва, ул...</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 offset-lg-2">
-                <div class="footer_column">
-                    <div class="footer_title">Ссылки</div>
-                    <ul class="footer_list">
-                        <li><a href="{% url 'home_app:home' %}">Продукция</a></li>
-                        <li><a href="{% url 'home_app:about' %}">О нас</a></li>
-                        <li><a href="{% url 'home_app:contacts' %}">Контакты</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
-
 </html>

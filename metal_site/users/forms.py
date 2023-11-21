@@ -5,10 +5,10 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
 
 class LoginUserForm(AuthenticationForm):
-    username = forms.CharField(
+    email = forms.EmailField(
         label="Логин",
-        widget=forms.TextInput(
-            attrs={"class": "form-input", "placeholder": "Введите логин"}
+        widget=forms.EmailInput(
+            attrs={"class": "form-input", "placeholder": "Введите e-mail"}
         ),
     )
     password = forms.CharField(
@@ -21,16 +21,16 @@ class LoginUserForm(AuthenticationForm):
     class Meta:
         model = get_user_model()
         fields = (
-            "username",
+            "email",
             "password",
         )
 
 
 class RegisterUserForm(UserCreationForm):
-    username = forms.CharField(
-        label="Логин",
-        widget=forms.TextInput(
-            attrs={"class": "form-input", "placeholder": "Введите логин"}
+    email = forms.EmailField(
+        label="E-mail",
+        widget=forms.EmailInput(
+            attrs={"class": "form-input", "placeholder": "Введите e-mail"}
         ),
     )
     password1 = forms.CharField(
@@ -49,7 +49,6 @@ class RegisterUserForm(UserCreationForm):
     class Meta:
         model = get_user_model()
         fields = (
-            "username",
             "email",
             "password1",
             "password2",
@@ -61,9 +60,6 @@ class RegisterUserForm(UserCreationForm):
             "first_name": "Имя",
             "last_name": "Фамилия",
         }
-        widgets = {
-            "email": forms.EmailInput(attrs={"placeholder": "Введите адрес email"}),
-        }
 
     def clean_email(self):
         email = self.cleaned_data["email"]
@@ -73,7 +69,6 @@ class RegisterUserForm(UserCreationForm):
 
 
 class ProfileUserForm(forms.ModelForm):
-    username = forms.CharField(disabled=True, label="Логин", widget=forms.TextInput())
     email = forms.CharField(disabled=True, label="E-mail", widget=forms.EmailInput())
     year = datetime.date.today().year
     date_birth = forms.DateField(
@@ -84,7 +79,6 @@ class ProfileUserForm(forms.ModelForm):
         model = get_user_model()
         fields = (
             "photo",
-            "username",
             "email",
             "first_name",
             "last_name",

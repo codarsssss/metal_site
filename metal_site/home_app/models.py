@@ -79,3 +79,18 @@ class Feedback(models.Model):
 
     def __str__(self):
         return f"{self.contact_number}-{self.name}:{self.time_create}"
+
+
+class FilePrice(models.Model):
+    time_create = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
+    price_file = models.FileField(
+        upload_to="home_app/%Y",
+        verbose_name="Актуальный прайс",
+        null=True,
+        default="test_price.pdf",
+    )
+
+    class Meta:
+        verbose_name = "Prices"
+        verbose_name_plural = "Price"
+        ordering = ["-time_create"]

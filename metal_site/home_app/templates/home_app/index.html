@@ -2,6 +2,7 @@
 {% load static %}
 {% block title %}{{title}}{% endblock title %}
 {% block content %}
+{% include "home_app/includes/downloadprice.html" %}
 {% for category in categories %}
 <h3>
     <a href="{{ category.get_absolute_url }}"> {{ category.title }} </a>

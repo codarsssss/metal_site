@@ -134,6 +134,9 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 MEDIA_URL = "/media/"
+
+DEFAULT_USER_IMAGE = MEDIA_URL + "default.png"
+
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 
 INTERNAL_IPS = [
@@ -165,5 +168,3 @@ SERVER_EMAIL = EMAIL_HOST_USER
 EMAIL_ADMIN = EMAIL_HOST_USER
 
 AUTH_USER_MODEL = "users.User"
-
-DEFAULT_USER_IMAGE = MEDIA_URL + "users/default.png"

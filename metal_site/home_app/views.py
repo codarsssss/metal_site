@@ -3,7 +3,7 @@ from typing import Any
 from django.db.models.query import QuerySet
 from django.urls import reverse_lazy
 from django.views.generic import ListView
-from django.shortcuts import get_object_or_404,  render
+from django.shortcuts import get_object_or_404, render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages
 from django.views.generic.edit import FormView
@@ -11,7 +11,7 @@ from django.views.generic.edit import FormView
 
 from .bot_telegram import send_telegram_message
 from .forms import FeedbackForm
-from .models import Category, Product
+from .models import Category, Product, FilePrice
 
 
 # Create your views here.
@@ -22,7 +22,10 @@ class HomeView(ListView):
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
+        price = FilePrice.objects.latest("time_create")
+
         context["title"] = "Продукция"
+        context["price"] = price
         return context
 
 
@@ -63,6 +66,7 @@ class ContactsFormView(FormView):  # назвать по другому
 
 def category_detail(request, slug):
     category = get_object_or_404(Category, slug=slug)
+    price = FilePrice.objects.latest("time_create")
     products_list = category.products.all()
     paginator = Paginator(products_list, 15)
     page_num = request.GET.get("page")
@@ -79,9 +83,18 @@ def category_detail(request, slug):
         {
             "category": category,
             "products": products,
+            "price": price,
         },
     )
 
 
 def about(request):
     return render(request, "home_app/about.html", {"title": "О компании"})
+
+
+def services(request):
+    return render(request, "home_app/services.html", {"title": "Услуги"})
+
+
+def transportation(request):
+    return render(request, "home_app/transportation.html", {"title": "Грузоперевозки"})
